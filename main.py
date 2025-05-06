@@ -6,8 +6,8 @@ from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 
 # =================== CONFIG ===================
-BOT_TOKEN = os.getenv("7796994967:AAFrF9Dl9eFn8EtHnbKGpXjkt2XJXBuCo6M")
-BASE_URL = os.getenv("https://telegram-bot-2-xvs8.onrender.com")  # เช่น https://your-service.onrender.com
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+BASE_URL = os.getenv("BASE_URL")  # เช่น https://your-service.onrender.com
 WEBHOOK_PATH = f"/webhook/{BOT_TOKEN}"
 # ==============================================
 
