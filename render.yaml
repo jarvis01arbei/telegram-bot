@@ -4,8 +4,10 @@ services:
     env: python
     region: singapore
     buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
+    startCommand: gunicorn main:app
     plan: free
     envVars:
-      - key: PORT
-        value: 10000
+      - key: BOT_TOKEN
+        value: <ใส่ token bot ของคุณ>
+      - key: BASE_URL
+        value: https://telegram-bot-webhook.onrender.com
