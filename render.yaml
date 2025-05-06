@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: telegram-bot-webhook
+    env: python
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
