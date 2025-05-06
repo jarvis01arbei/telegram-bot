@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+import asyncio
 from flask import Flask, request
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
@@ -120,8 +121,10 @@ async def webhook():
 
 # ====== Run Flask + Set Webhook ======
 if __name__ == "__main__":
-    webhook_url = f"{BASE_URL}{WEBHOOK_PATH}"
-    application.bot.set_webhook(webhook_url)
-    print(f"✅ Webhook set: {webhook_url}")
+    async def main():
+        webhook_url = f"{BASE_URL}{WEBHOOK_PATH}"
+        await application.bot.set_webhook(webhook_url)
+        print(f"✅ Webhook set: {webhook_url}")
+        app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    asyncio.run(main())
