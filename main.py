@@ -1,13 +1,12 @@
 from datetime import datetime
 import os
-import asyncio
 from flask import Flask, request
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 
 # =================== CONFIG ===================
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-BASE_URL = os.getenv("BASE_URL")  # เช่น https://your-service.onrender.com
+BOT_TOKEN = os.getenv("BOT_TOKEN")  # ใช้ชื่อ key จาก envVars
+BASE_URL = os.getenv("BASE_URL")    # เช่น https://your-service.onrender.com
 WEBHOOK_PATH = f"/webhook/{BOT_TOKEN}"
 # ==============================================
 
@@ -119,13 +118,10 @@ async def webhook():
         return "ok"
     return "not allowed", 405
 
-# ====== Setup Webhook ======
-@app.before_first_request
-def init_webhook():
+# ====== Run Flask + Set Webhook ======
+if __name__ == "__main__":
     webhook_url = f"{BASE_URL}{WEBHOOK_PATH}"
-    asyncio.get_event_loop().create_task(application.bot.set_webhook(webhook_url))
+    application.bot.set_webhook(webhook_url)
     print(f"✅ Webhook set: {webhook_url}")
 
-# ====== Run Flask ======
-if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
