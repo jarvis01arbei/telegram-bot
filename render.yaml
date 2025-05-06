@@ -8,6 +8,6 @@ services:
     plan: free
     envVars:
       - key: BOT_TOKEN
-        value: <ใส่ token bot ของคุณ>
+        value: 7796994967:AAFrF9Dl9eFn8EtHnbKGpXjkt2XJXBuCo6M
       - key: BASE_URL
-        value: https://telegram-bot-webhook.onrender.com
+        value: https://telegram-bot-2-xvs8.onrender.com
