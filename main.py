@@ -1,14 +1,14 @@
 from datetime import datetime
 import os
+import asyncio
 from flask import Flask, request
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
-from telegram.ext import Dispatcher
 
 # =================== CONFIG ===================
 BOT_TOKEN = os.getenv("7796994967:AAFrF9Dl9eFn8EtHnbKGpXjkt2XJXBuCo6M")
-WEBHOOK_PATH = f"/webhook/{BOT_TOKEN}"
 BASE_URL = os.getenv("https://telegram-bot-2-xvs8.onrender.com")  # เช่น https://your-service.onrender.com
+WEBHOOK_PATH = f"/webhook/{BOT_TOKEN}"
 # ==============================================
 
 user_data = {}
@@ -123,7 +123,7 @@ async def webhook():
 @app.before_first_request
 def init_webhook():
     webhook_url = f"{BASE_URL}{WEBHOOK_PATH}"
-    application.bot.set_webhook(webhook_url)
+    asyncio.get_event_loop().create_task(application.bot.set_webhook(webhook_url))
     print(f"✅ Webhook set: {webhook_url}")
 
 # ====== Run Flask ======
